@@ -27,3 +27,12 @@ def valid_input(prompt, error_msg, validator):
 def valid_date_input(prompt, error_msg, validator=lambda v: True):
     date_str = valid_input(prompt, error_msg, lambda v: is_valid_date(v) and validator(v))
     return str_to_date(date_str)
+
+
+def print_list(items, header="Options"):
+    print()
+    print(header)
+    print("-"*len(header))
+    for item in items:
+        print(f' - {item}')
+    print()
