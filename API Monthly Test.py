@@ -8,7 +8,7 @@ import json
 ##pulled from documentation for reference with API in use
 #initialize variables
 symbol = "IBM"
-url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&interval=5min&apikey=AU4UXQO6WFYENR4J'
+url = f'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&interval=5min&apikey=AU4UXQO6WFYENR4J'
 r = requests.get(url)
 data = r.json()
 i = 0
@@ -19,8 +19,8 @@ Closeinput = []
 DateArray = []
 open, high, low, close = "OPEN", "HIGH", "LOW","CLOSE"
 
-UserStartDate = '2021-10-20'
-UserEndDate = '2022-10-20'
+UserStartDate = '2022-06-03'
+UserEndDate = '2022-10-03'
 
 
 #creates a datetime object using a string
@@ -42,10 +42,10 @@ while date_2s != date_1s:
     #to combat this we continue through the 
     #iteration even if there's no value for the associated key
     try:
-        opendata = data['Time Series (Daily)'][dt]['1. open']
-        highdata = data['Time Series (Daily)'][dt]['2. high']
-        lowdata = data['Time Series (Daily)'][dt]['3. low']
-        closedata = data['Time Series (Daily)'][dt]['4. close']
+        opendata = data['Monthly Time Series'][dt]['1. open']
+        highdata = data['Monthly Time Series'][dt]['2. high']
+        lowdata = data['Monthly Time Series'][dt]['3. low']
+        closedata = data['Monthly Time Series'][dt]['4. close']
         #print(highdata,opendata,lowdata,closedata)
 
         
