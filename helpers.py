@@ -1,7 +1,7 @@
 from datetime import datetime
 
 DF_DEFAULT = '%Y-%m-%d'
-DF_INTRADAY = '%Y-%m-%d'
+DF_INTRADAY = '%Y-%m-%d %H:%M:%S'
 
 
 def str_to_date(v, f=DF_DEFAULT):

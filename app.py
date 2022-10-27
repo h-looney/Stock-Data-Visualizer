@@ -1,3 +1,4 @@
+from datetime import timedelta
 from helpers import valid_input, valid_date_input, str_to_date, print_list
 from StockDataChart import StockDataChart, CHART_TYPES, TIME_SERIES
 
@@ -17,10 +18,14 @@ def gen_stock_data():
             time_series = valid_input('Choose a time series option:', 'That time series option is invalid.', lambda v: v in TIME_SERIES)
             # Start Date
             print()
-            start_date = valid_date_input('Enter the start date (YYYY-MM-DD):', 'Must be a valid date (YYYY-MM-DD).')
+            prompt = f'Enter the{"" if time_series == "Intraday" else " start"} date (YYYY-MM-DD):'
+            start_date = valid_date_input(prompt, 'Must be a valid date (YYYY-MM-DD).')
             # End Date
             print()
-            end_date = valid_date_input('Enter the end date (YYYY-MM-DD):', 'Must be a valid date (YYYY-MM-DD) after the start date.', lambda v: str_to_date(v) > start_date)
+            if time_series != 'Intraday':
+                end_date = valid_date_input('Enter the end date (YYYY-MM-DD):', 'Must be a valid date (YYYY-MM-DD) after the start date.', lambda v: str_to_date(v) > start_date)
+            else:
+                end_date = start_date + timedelta(days=1)
             break
         except ValueError:
             print("Error: Invalid number. Please enter a new value: ")

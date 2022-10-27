@@ -5,7 +5,7 @@ from helpers import date_to_str, DF_DEFAULT, DF_INTRADAY
 
 CHART_TYPES = ['Bar', 'Line']
 TIME_SERIES = {
-    'Intraday': {'key': '', 'scale': {}},
+    'Intraday': {'key': 'Time Series (60min)', 'scale': {'hours': 1}},
     'Daily': {'key': 'Time Series (Daily)', 'scale': {'days': 1}},
     'Weekly': {'key': 'Weekly Time Series', 'scale': {'days': 1}},
     'Monthly': {'key': 'Monthly Time Series', 'scale': {'days': 1}}
@@ -25,7 +25,7 @@ class StockDataChart:
         self.start_date = start_date
         self.end_date = end_date
         self.default_opts['title'] = f'{self.symbol} stocks for {date_to_str(self.start_date)} - {date_to_str(self.end_date)}'
-        self.url += f'function=TIME_SERIES_{time_series.upper()}&symbol={symbol}&interval=5min&apikey={self.__apiKey}'
+        self.url += f'function=TIME_SERIES_{time_series.upper()}&symbol={symbol}&interval=60min&apikey={self.__apiKey}'
         self.fetch_data()
 
     def fetch_data(self):
