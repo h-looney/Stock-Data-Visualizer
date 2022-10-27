@@ -1,0 +1,11 @@
+To run our Stock Data Visualizer you will be using the files "app.py" (app), "helpers.py" (helpers), and "StockDataChart.py" (SDC) so make sure that
+those three file remain in the same folder, the rest are test programs or files that are unnecessary to running the program.
+
+Instructions:
+----------------------------
+Open your system's terminal.
+Navigate to the folder or directory you have these files (app, helpers, SDC) stored in.
+Type "python app.py" into the command line.
+The program will then direct your input from there.
+
+Enjoy!
