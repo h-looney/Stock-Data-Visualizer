@@ -7,7 +7,7 @@ CHART_TYPES = ['Bar', 'Line']
 TIME_SERIES = {
     'Intraday': {'key': '', 'scale': {}},
     'Daily': {'key': 'Time Series (Daily)', 'scale': {'days': 1}},
-    'Weekly': {'key': '', 'scale': {}},
+    'Weekly': {'key': 'Weekly Time Series', 'scale': {'days': 1}},
     'Monthly': {'key': 'Monthly Time Series', 'scale': {'days': 1}}
 }
 
