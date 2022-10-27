@@ -5,10 +5,10 @@ from helpers import date_to_str, DF_DEFAULT, DF_INTRADAY
 
 CHART_TYPES = ['Bar', 'Line']
 TIME_SERIES = {
-    'Intraday': {},
-    'Daily': {'days': 1},
-    'Weekly': {},
-    'Monthly': {}
+    'Intraday': {'key': '', 'scale': {}},
+    'Daily': {'key': 'Time Series (Daily)', 'scale': {'days': 1}},
+    'Weekly': {'key': '', 'scale': {}},
+    'Monthly': {'key': 'Monthly Time Series', 'scale': {'days': 1}}
 }
 
 
@@ -42,29 +42,22 @@ class StockDataChart:
     def build_chart(self, chart):
         x_labels = []
         points = {'OPEN': [], 'HIGH': [], 'LOW': [], 'CLOSE': []}
-        stock_data = self.data[f'Time Series ({self.time_series})']
+        stock_data = self.data[TIME_SERIES[self.time_series]['key']]
         dt = self.start_date
         while dt <= self.end_date:
             date_format = DF_INTRADAY if self.time_series == 'Intraday' else DF_DEFAULT
             date_str = date_to_str(dt, date_format)
-            x_labels.append(date_str)
             try:
                 points['OPEN'].append(float(stock_data[date_str]['1. open']))
                 points['HIGH'].append(float(stock_data[date_str]['2. high']))
                 points['LOW'].append(float(stock_data[date_str]['3. low']))
                 points['CLOSE'].append(float(stock_data[date_str]['4. close']))
             except KeyError:
-                points['OPEN'].append(None)
-                points['HIGH'].append(None)
-                points['LOW'].append(None)
-                points['CLOSE'].append(None)
+                continue
+            else:
+                x_labels.append(date_str)
             finally:
-                match self.time_series:
-                    case 'Intraday' | 'Daily':
-                        dt += timedelta(**TIME_SERIES[self.time_series])
-                    case 'Weekly' | 'Monthly':
-                        pass
-                    case _: continue
+                dt += timedelta(**TIME_SERIES[self.time_series]['scale'])
         chart.x_labels = x_labels
         for line in points:
             chart.add(line, points[line])
